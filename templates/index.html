@@ -1,0 +1,55 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Engine</title>
+</head>
+<body>
+    <div>
+        <h1>Search Engine</h1>
+        <form method="post" action="/">
+            <label for="user_input">Enter a sentence:</label>
+            <input type="text" id="user_input" name="user_input" required>
+            <button type="submit">Search</button>
+        </form>
+
+        {% if suggestions %}
+            <h2>Search Results:</h2>
+            <ul>
+                {% for suggestion in suggestions %}
+                    <li>
+                        <p>Paper Title: {{ suggestion['ptitle'] }}</p>
+                        <p>Author: {{ suggestion['author'] }}</p>
+                        <p>Year: {{ suggestion['year'] }}</p>
+                        <p>Similarity: {{ suggestion['similarity'] }}</p>
+                        <p>Keywords: {{ suggestion['keywords'] }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <div>
+        <h2>Keywords Section</h2>
+        <form method="post" action="/keywords">
+            <input type="submit" value="All Keywords">
+        </form>
+
+        {% if keywords %}
+            <h2>Top Keywords:</h2>
+            <ul>
+                {% for keyword_info in keywords %}
+                    <li>
+                        <p>Title: {{ keyword_info['ptitle'] }}</p>
+                        <p>Author: {{ keyword_info['author'] }}</p>
+                        <p>Year: {{ keyword_info['year'] }}</p>
+                        <p>Keywords: {{ keyword_info['keywords'] }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</body>
+</html>
